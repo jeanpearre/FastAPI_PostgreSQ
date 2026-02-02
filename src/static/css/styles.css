@@ -1,0 +1,237 @@
+/* ------------------------------
+   RESET BÁSICO
+------------------------------ */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    background: #f5f5f5;
+    color: #222;
+}
+
+/* ------------------------------
+   NAVBAR
+------------------------------ */
+.navbar {
+    background: #000;
+    color: #fff;
+    padding: 15px 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.nav-logo {
+    font-size: 22px;
+    font-weight: 600;
+}
+
+.audi-logo {
+    color: #e60000;
+    font-weight: 700;
+}
+
+.nav-links a {
+    color: #fff;
+    margin-left: 20px;
+    text-decoration: none;
+    font-weight: 400;
+}
+
+.nav-links a:hover {
+    color: #e60000;
+}
+
+/* ------------------------------
+   CONTENEDOR PRINCIPAL
+------------------------------ */
+.container {
+    max-width: 1100px;
+    margin: 40px auto;
+    padding: 0 20px;
+}
+
+/* ------------------------------
+   BANNER PRINCIPAL
+------------------------------ */
+.hero-banner img {
+    width: 100%;
+    border-radius: 12px;
+    margin-bottom: 30px;
+}
+
+/* ------------------------------
+   BOTONES
+------------------------------ */
+.btn {
+    background: #e60000;
+    color: #fff;
+    padding: 10px 18px;
+    border-radius: 6px;
+    text-decoration: none;
+    display: inline-block;
+    transition: 0.3s;
+}
+
+.btn:hover {
+    background: #b30000;
+}
+
+.btn-secondary {
+    background: #555;
+}
+
+.btn-secondary:hover {
+    background: #333;
+}
+
+.btn-small {
+    padding: 6px 12px;
+    font-size: 14px;
+}
+
+.btn-delete {
+    background: #b30000;
+}
+
+.btn-delete:hover {
+    background: #7a0000;
+}
+
+/* ------------------------------
+   TABLAS
+------------------------------ */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 25px;
+}
+
+table th, table td {
+    padding: 12px;
+    border-bottom: 1px solid #ddd;
+}
+
+table th {
+    background: #eee;
+    text-align: left;
+}
+
+/* ------------------------------
+   FORMULARIOS
+------------------------------ */
+.formulario {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    max-width: 400px;
+}
+
+.formulario input {
+    padding: 10px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+}
+
+/* ------------------------------
+   ALERTAS
+------------------------------ */
+.alerta {
+    padding: 12px;
+    border-radius: 6px;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.alerta.creada {
+    background: #d4f8d4;
+    color: #0a7a0a;
+}
+
+.alerta.eliminada {
+    background: #ffe0e0;
+    color: #a30000;
+}
+
+/* ------------------------------
+   FOOTER
+------------------------------ */
+.footer {
+    text-align: center;
+    padding: 20px;
+    margin-top: 60px;
+    background: #000;
+    color: #fff;
+}
+
+/* ------------------------------
+   GALERÍA DE MODELOS (CORREGIDA)
+------------------------------ */
+.galeria-modelos {
+    margin-top: 60px;
+    padding: 0 20px;
+}
+
+.galeria-modelos h2 {
+    font-size: 24px;
+    margin-bottom: 30px;
+    text-align: center;
+}
+
+/* Línea horizontal de tarjetas */
+.modelo-linea {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    flex-wrap: wrap; /* No rompe diseño */
+}
+
+/* Tarjetas iguales */
+.modelo-card {
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.08);
+    width: 260px;
+    height: 360px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 20px;
+    text-align: center;
+    transition: 0.3s;
+}
+
+.modelo-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.12);
+}
+
+/* Imágenes uniformes */
+.modelo-card img {
+    width: 100%;
+    height: 160px;
+    object-fit: cover;
+    border-radius: 8px;
+}
+
+/* Título y texto */
+.modelo-card h3 {
+    margin: 10px 0 5px;
+    font-size: 18px;
+}
+
+.modelo-card p {
+    color: #666;
+    margin-bottom: 15px;
+}
+
+/* Botones */
+.modelo-botones {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}

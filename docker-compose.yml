@@ -1,0 +1,25 @@
+name: fastapi-coches
+
+services:
+  fastapi-app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: fastapi-app-coches
+    restart: always
+    ports:
+      - "8000:8000"
+    depends_on:
+      - fastapi-db
+    environment:
+      DB_URL: "postgresql+psycopg2://quevedo:1234@fastapi-db:5432/cochesdb"
+
+  fastapi-db:
+    image: postgres:16
+    container_name: fastapi-db
+    environment:
+      POSTGRES_DB: cochesdb
+      POSTGRES_USER: quevedo
+      POSTGRES_PASSWORD: 1234
+    ports:
+      - "5432:5432"

@@ -1,0 +1,21 @@
+{% extends "fragments/base.html" %}
+
+{% block title %}Eliminar coche{% endblock %}
+
+{% block content %}
+<h1>Eliminar coche</h1>
+
+{% if coche %}
+    <p>¿Seguro que deseas eliminar el coche <strong>{{ coche.modelo }}</strong> (ID {{ coche.id }})?</p>
+
+    <form method="post" class="formulario">
+        <button class="btn btn-delete" type="submit">Eliminar</button>
+        <a class="btn btn-secondary" href="/coches">Cancelar</a>
+    </form>
+{% else %}
+    <div class="alerta eliminada">Coche eliminado correctamente.</div>
+    <p class="acciones-extra">
+        <a class="btn btn-secondary" href="/coches">Volver al listado</a>
+    </p>
+{% endif %}
+{% endblock %}

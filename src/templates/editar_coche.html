@@ -1,0 +1,28 @@
+{% extends "fragments/base.html" %}
+
+{% block title %}Editar coche{% endblock %}
+
+{% block content %}
+<h1>Editar coche</h1>
+
+{% if mensaje %}
+    <div class="alerta creada">{{ mensaje }}</div>
+{% endif %}
+
+<form action="/coches/editar/{{ coche.id }}" method="post" class="formulario">
+    <label for="modelo">Modelo:</label>
+    <input id="modelo" type="text" name="modelo" value="{{ coche.modelo }}" required>
+
+    <label for="anio">Año:</label>
+    <input id="anio" type="number" name="anio" value="{{ coche.anio }}" required>
+
+    <label for="precio">Precio (€):</label>
+    <input id="precio" type="number" name="precio" value="{{ coche.precio }}" required>
+
+    <button class="btn" type="submit">Guardar cambios</button>
+</form>
+
+<p class="acciones-extra">
+    <a class="btn btn-secondary" href="/coches">Volver al listado</a>
+</p>
+{% endblock %}

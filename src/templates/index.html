@@ -1,0 +1,62 @@
+{% extends "fragments/base.html" %}
+
+{% block title %}Inicio{% endblock %}
+
+{% block content %}
+
+<h1>Concesionario Oficial Audi</h1>
+<p class="intro-text">
+    Descubramos juntos nuestra selección de vehículos Audi: diseño, tecnología y rendimiento al máximo nivel.
+    <br>
+    <br>
+</p>
+
+<div class="hero-banner">
+    <img src="/static/img/audi-banner.jpg" alt="Audi Banner">
+</div>
+
+<center>
+<a class="btn" href="/coches">Ver catálogo</a>
+</center>
+
+<br>
+<br>
+<section class="galeria-modelos">
+    <h2>Modelos destacados</h2>
+
+    <div class="modelo-linea">
+
+        <div class="modelo-card">
+            <img src="/static/img/audi-a1.jpg" alt="Audi A1">
+            <h3>Audi A1</h3>
+            <p>2 modelos disponibles</p>
+            <div class="modelo-botones">
+                <a href="/coches" class="btn btn-small">Ver modelos</a>
+                <a href="https://www.audi.es/es/" target="_blank" class="btn btn-small btn-secondary">Comparar</a>
+            </div>
+        </div>
+
+        <div class="modelo-card">
+            <img src="/static/img/audi-a3.jpg" alt="Audi A3">
+            <h3>Audi A3</h3>
+            <p>9 modelos disponibles</p>
+            <div class="modelo-botones">
+                <a href="/coches" class="btn btn-small">Ver modelos</a>
+                <a href="https://www.audi.es/es/" target="_blank" class="btn btn-small btn-secondary">Comparar</a>
+            </div>
+        </div>
+
+        <div class="modelo-card">
+            <img src="/static/img/audi-a5.jpg" alt="Audi A5">
+            <h3>Audi A5</h3>
+            <p>6 modelos disponibles</p>
+            <div class="modelo-botones">
+                <a href="/coches" class="btn btn-small">Ver modelos</a>
+                <a href="https://www.audi.es/es/" target="_blank" class="btn btn-small btn-secondary">Comparar</a>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+{% endblock %}

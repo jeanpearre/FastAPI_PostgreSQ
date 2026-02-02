@@ -1,0 +1,1050 @@
+COCHES-API-WEB-MYSQL
+
+main.cpython-313.pyc
+db.cpython-313.pyc
+coche.cpython-313.pyc
+
+
+
+
+
+
+
+css/styles.css
+**********
+/* ------------------------------
+   RESET BÁSICO
+------------------------------ */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    background: #f5f5f5;
+    color: #222;
+}
+
+/* ------------------------------
+   NAVBAR
+------------------------------ */
+.navbar {
+    background: #000;
+    color: #fff;
+    padding: 15px 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.nav-logo {
+    font-size: 22px;
+    font-weight: 600;
+}
+
+.audi-logo {
+    color: #e60000;
+    font-weight: 700;
+}
+
+.nav-links a {
+    color: #fff;
+    margin-left: 20px;
+    text-decoration: none;
+    font-weight: 400;
+}
+
+.nav-links a:hover {
+    color: #e60000;
+}
+
+/* ------------------------------
+   CONTENEDOR PRINCIPAL
+------------------------------ */
+.container {
+    max-width: 1100px;
+    margin: 40px auto;
+    padding: 0 20px;
+}
+
+/* ------------------------------
+   BANNER PRINCIPAL
+------------------------------ */
+.hero-banner img {
+    width: 100%;
+    border-radius: 12px;
+    margin-bottom: 30px;
+}
+
+/* ------------------------------
+   BOTONES
+------------------------------ */
+.btn {
+    background: #e60000;
+    color: #fff;
+    padding: 10px 18px;
+    border-radius: 6px;
+    text-decoration: none;
+    display: inline-block;
+    transition: 0.3s;
+}
+
+.btn:hover {
+    background: #b30000;
+}
+
+.btn-secondary {
+    background: #555;
+}
+
+.btn-secondary:hover {
+    background: #333;
+}
+
+.btn-small {
+    padding: 6px 12px;
+    font-size: 14px;
+}
+
+.btn-delete {
+    background: #b30000;
+}
+
+.btn-delete:hover {
+    background: #7a0000;
+}
+
+/* ------------------------------
+   TABLAS
+------------------------------ */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 25px;
+}
+
+table th, table td {
+    padding: 12px;
+    border-bottom: 1px solid #ddd;
+}
+
+table th {
+    background: #eee;
+    text-align: left;
+}
+
+/* ------------------------------
+   FORMULARIOS
+------------------------------ */
+.formulario {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    max-width: 400px;
+}
+
+.formulario input {
+    padding: 10px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+}
+
+/* ------------------------------
+   ALERTAS
+------------------------------ */
+.alerta {
+    padding: 12px;
+    border-radius: 6px;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.alerta.creada {
+    background: #d4f8d4;
+    color: #0a7a0a;
+}
+
+.alerta.eliminada {
+    background: #ffe0e0;
+    color: #a30000;
+}
+
+/* ------------------------------
+   FOOTER
+------------------------------ */
+.footer {
+    text-align: center;
+    padding: 20px;
+    margin-top: 60px;
+    background: #000;
+    color: #fff;
+}
+
+/* ------------------------------
+   GALERÍA DE MODELOS (CORREGIDA)
+------------------------------ */
+.galeria-modelos {
+    margin-top: 60px;
+    padding: 0 20px;
+}
+
+.galeria-modelos h2 {
+    font-size: 24px;
+    margin-bottom: 30px;
+    text-align: center;
+}
+
+/* Línea horizontal de tarjetas */
+.modelo-linea {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    flex-wrap: wrap; /* No rompe diseño */
+}
+
+/* Tarjetas iguales */
+.modelo-card {
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.08);
+    width: 260px;
+    height: 360px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 20px;
+    text-align: center;
+    transition: 0.3s;
+}
+
+.modelo-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.12);
+}
+
+/* Imágenes uniformes */
+.modelo-card img {
+    width: 100%;
+    height: 160px;
+    object-fit: cover;
+    border-radius: 8px;
+}
+
+/* Título y texto */
+.modelo-card h3 {
+    margin: 10px 0 5px;
+    font-size: 18px;
+}
+
+.modelo-card p {
+    color: #666;
+    margin-bottom: 15px;
+}
+
+/* Botones */
+.modelo-botones {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+
+
+
+
+
+
+
+
+static.html
+***********
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    Esto es un html estático
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+fragments/base.html
+*******************
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}{% endblock %}</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/static/css/styles.css">
+</head>
+
+<body>
+
+    <header class="navbar">
+        <div class="nav-logo">
+            <span class="audi-logo">Audi</span> Manager
+        </div>
+
+        <nav class="nav-links">
+            <a href="/">Inicio</a>
+            <a href="/coches">Lista</a>
+            <a href="/coches/crear">Crear</a>
+        </nav>
+    </header>
+
+    <main class="container">
+        {% block content %}{% endblock %}
+    </main>
+
+    <footer class="footer">
+        <p>Gestor de Coches Audi — FastAPI + Jinja2</p>
+    </footer>
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+coche_detalle.html
+******************
+{% extends "fragments/base.html" %}
+
+{% block title %}Detalle del coche{% endblock %}
+
+{% block content %}
+<h1>{{ coche.modelo }}</h1>
+
+<ul class="detalle-lista">
+    <li><strong>Año:</strong> {{ coche.anio }}</li>
+    <li><strong>Precio:</strong> {{ coche.precio }} €</li>
+</ul>
+
+<p class="acciones-extra">
+    <a class="btn" href="/coches">Volver al listado</a>
+    <a class="btn" href="/coches/editar/{{ coche.id }}">Editar</a>
+    <a class="btn btn-delete" href="/coches/eliminar/{{ coche.id }}">Eliminar</a>
+</p>
+{% endblock %}
+
+
+
+
+
+
+
+
+
+
+coches.html
+***********
+{% extends "fragments/base.html" %}
+
+{% block title %}Listado de coches{% endblock %}
+
+{% block content %}
+<h1>Listado de coches Audi</h1>
+
+<table>
+    <tr>
+        <th>ID</th>
+        <th>Modelo</th>
+        <th>Año</th>
+        <th>Precio</th>
+        <th>Acciones</th>
+    </tr>
+
+    {% for coche in coches %}
+    <tr>
+        <td>{{ coche.id }}</td>
+        <td>{{ coche.modelo }}</td>
+        <td>{{ coche.anio }}</td>
+        <td>{{ coche.precio }} €</td>
+        <td>
+            <a class="btn btn-small" href="/coches/{{ coche.id }}">Ver</a>
+            <a class="btn btn-small" href="/coches/editar/{{ coche.id }}">Editar</a>
+            <a class="btn btn-small btn-delete" href="/coches/eliminar/{{ coche.id }}">Eliminar</a>
+        </td>
+    </tr>
+    {% endfor %}
+</table>
+
+<br>
+<br>
+
+<div class="hero-banner">
+    <img src="/static/img/audi-banner2.jpg" alt="Audi Banner">
+</div>
+
+<center>
+<p class="acciones-extra">
+    <a class="btn" href="/coches/crear">Añadir nuevo coche</a>
+</p>
+</center>
+<br>
+{% endblock %}
+
+
+
+
+
+
+
+
+
+
+crear_coche.html
+****************
+{% extends "fragments/base.html" %}
+
+{% block title %}Crear coche{% endblock %}
+
+{% block content %}
+<h1>Añadir nuevo Audi</h1>
+
+{% if mensaje %}
+    <div class="alerta creada">{{ mensaje }}</div>
+{% endif %}
+
+<form action="/coches/crear" method="post" class="formulario">
+    <label for="modelo">Modelo:</label>
+    <input id="modelo" type="text" name="modelo" required>
+
+    <label for="anio">Año:</label>
+    <input id="anio" type="number" name="anio" required>
+
+    <label for="precio">Precio (€):</label>
+    <input id="precio" type="number" name="precio" required>
+
+    <button class="btn" type="submit">Crear coche</button>
+</form>
+
+<p class="acciones-extra">
+    <a class="btn btn-secondary" href="/coches">Volver al listado</a>
+</p>
+{% endblock %}
+
+
+
+
+
+
+
+
+editar_coche.html
+*****************
+{% extends "fragments/base.html" %}
+
+{% block title %}Editar coche{% endblock %}
+
+{% block content %}
+<h1>Editar coche</h1>
+
+{% if mensaje %}
+    <div class="alerta creada">{{ mensaje }}</div>
+{% endif %}
+
+<form action="/coches/editar/{{ coche.id }}" method="post" class="formulario">
+    <label for="modelo">Modelo:</label>
+    <input id="modelo" type="text" name="modelo" value="{{ coche.modelo }}" required>
+
+    <label for="anio">Año:</label>
+    <input id="anio" type="number" name="anio" value="{{ coche.anio }}" required>
+
+    <label for="precio">Precio (€):</label>
+    <input id="precio" type="number" name="precio" value="{{ coche.precio }}" required>
+
+    <button class="btn" type="submit">Guardar cambios</button>
+</form>
+
+<p class="acciones-extra">
+    <a class="btn btn-secondary" href="/coches">Volver al listado</a>
+</p>
+{% endblock %}
+
+
+
+
+
+
+
+
+eliminar_serie.html
+*******************
+{% extends "fragments/base.html" %}
+
+{% block title %}Eliminar coche{% endblock %}
+
+{% block content %}
+<h1>Eliminar coche</h1>
+
+{% if coche %}
+    <p>¿Seguro que deseas eliminar el coche <strong>{{ coche.modelo }}</strong> (ID {{ coche.id }})?</p>
+
+    <form method="post" class="formulario">
+        <button class="btn btn-delete" type="submit">Eliminar</button>
+        <a class="btn btn-secondary" href="/coches">Cancelar</a>
+    </form>
+{% else %}
+    <div class="alerta eliminada">Coche eliminado correctamente.</div>
+    <p class="acciones-extra">
+        <a class="btn btn-secondary" href="/coches">Volver al listado</a>
+    </p>
+{% endif %}
+{% endblock %}
+
+
+
+
+
+
+
+
+
+index.html
+**********
+{% extends "fragments/base.html" %}
+
+{% block title %}Inicio{% endblock %}
+
+{% block content %}
+
+<h1>Concesionario Oficial Audi</h1>
+<p class="intro-text">
+    Descubramos juntos nuestra selección de vehículos Audi: diseño, tecnología y rendimiento al máximo nivel.
+    <br>
+    <br>
+</p>
+
+<div class="hero-banner">
+    <img src="/static/img/audi-banner.jpg" alt="Audi Banner">
+</div>
+
+<center>
+<a class="btn" href="/coches">Ver catálogo</a>
+</center>
+
+<br>
+<br>
+<section class="galeria-modelos">
+    <h2>Modelos destacados</h2>
+
+    <div class="modelo-linea">
+
+        <div class="modelo-card">
+            <img src="/static/img/audi-a1.jpg" alt="Audi A1">
+            <h3>Audi A1</h3>
+            <p>2 modelos disponibles</p>
+            <div class="modelo-botones">
+                <a href="/coches" class="btn btn-small">Ver modelos</a>
+                <a href="https://www.audi.es/es/" target="_blank" class="btn btn-small btn-secondary">Comparar</a>
+            </div>
+        </div>
+
+        <div class="modelo-card">
+            <img src="/static/img/audi-a3.jpg" alt="Audi A3">
+            <h3>Audi A3</h3>
+            <p>9 modelos disponibles</p>
+            <div class="modelo-botones">
+                <a href="/coches" class="btn btn-small">Ver modelos</a>
+                <a href="https://www.audi.es/es/" target="_blank" class="btn btn-small btn-secondary">Comparar</a>
+            </div>
+        </div>
+
+        <div class="modelo-card">
+            <img src="/static/img/audi-a5.jpg" alt="Audi A5">
+            <h3>Audi A5</h3>
+            <p>6 modelos disponibles</p>
+            <div class="modelo-botones">
+                <a href="/coches" class="btn btn-small">Ver modelos</a>
+                <a href="https://www.audi.es/es/" target="_blank" class="btn btn-small btn-secondary">Comparar</a>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+{% endblock %}
+
+
+
+
+
+
+
+
+main.py
+*******
+from fastapi import FastAPI, Request, HTTPException, Form, Depends
+from fastapi.responses import HTMLResponse, RedirectResponse
+from fastapi.templating import Jinja2Templates
+from fastapi.staticfiles import StaticFiles
+from sqlmodel import select
+from pathlib import Path
+
+from src.models.coche import Coche
+from src.data.db import get_session, init_db
+
+app = FastAPI()
+
+BASE_DIR = Path(__file__).resolve().parent
+
+templates = Jinja2Templates(directory=str(BASE_DIR / "templates"))
+app.mount("/static", StaticFiles(directory=str(BASE_DIR / "static")), name="static")
+
+
+
+@app.on_event("startup")
+def on_startup():
+    init_db()
+
+
+@app.get("/", response_class=HTMLResponse)
+async def inicio(request: Request):
+    return templates.TemplateResponse("index.html", {"request": request})
+
+
+@app.get("/coches", response_class=HTMLResponse)
+async def ver_coches(request: Request, session=Depends(get_session)):
+    coches = session.exec(select(Coche)).all()
+    return templates.TemplateResponse("coches.html", {"request": request, "coches": coches})
+
+
+@app.get("/coches/crear", response_class=HTMLResponse)
+async def crear_coche_form(request: Request):
+    return templates.TemplateResponse("crear_coche.html", {"request": request, "mensaje": None})
+
+
+@app.post("/coches/crear", response_class=HTMLResponse)
+async def crear_coche_post(
+    request: Request,
+    session=Depends(get_session),
+    modelo: str = Form(...),
+    anio: int = Form(...),
+    precio: float = Form(...)
+):
+    nuevo_coche = Coche(modelo=modelo, anio=anio, precio=precio)
+    session.add(nuevo_coche)
+    session.commit()
+    session.refresh(nuevo_coche)
+
+    mensaje = f"Coche {modelo} creado correctamente."
+
+    return templates.TemplateResponse("crear_coche.html", {"request": request, "mensaje": mensaje})
+
+
+@app.get("/coches/editar/{coche_id}", response_class=HTMLResponse)
+async def editar_coche_form(coche_id: int, request: Request, session=Depends(get_session)):
+    coche = session.get(Coche, coche_id)
+    if not coche:
+        raise HTTPException(status_code=404, detail="Coche no encontrado")
+    return templates.TemplateResponse("editar_coche.html", {"request": request, "coche": coche})
+
+
+@app.post("/coches/editar/{coche_id}", response_class=HTMLResponse)
+async def editar_coche_post(
+    coche_id: int,
+    request: Request,
+    session=Depends(get_session),
+    modelo: str = Form(...),
+    anio: int = Form(...),
+    precio: float = Form(...)
+):
+    coche = session.get(Coche, coche_id)
+    if not coche:
+        raise HTTPException(status_code=404, detail="Coche no encontrado")
+
+    coche.modelo = modelo
+    coche.anio = anio
+    coche.precio = precio
+
+    session.add(coche)
+    session.commit()
+    session.refresh(coche)
+
+    return templates.TemplateResponse(
+        "editar_coche.html",
+        {
+            "request": request,
+            "coche": coche,
+            "mensaje": f"Coche {modelo} actualizado correctamente."
+        }
+    )
+
+
+@app.get("/coches/eliminar/{coche_id}", response_class=HTMLResponse)
+async def eliminar_coche_form(coche_id: int, request: Request, session=Depends(get_session)):
+    coche = session.get(Coche, coche_id)
+    return templates.TemplateResponse("eliminar_coche.html", {"request": request, "coche": coche})
+
+
+@app.post("/coches/eliminar/{coche_id}")
+async def eliminar_coche_post(coche_id: int, session=Depends(get_session)):
+    coche = session.get(Coche, coche_id)
+    if coche:
+        session.delete(coche)
+        session.commit()
+    return RedirectResponse(url="/coches", status_code=303)
+
+
+@app.get("/coches/{coche_id}", response_class=HTMLResponse)
+async def detalle_coche(coche_id: int, request: Request, session=Depends(get_session)):
+    coche = session.get(Coche, coche_id)
+    if not coche:
+        raise HTTPException(status_code=404, detail="Coche no encontrado")
+    return templates.TemplateResponse("coche_detalle.html", {"request": request, "coche": coche})
+
+
+@app.get("/api/coches", response_model=list[Coche])
+async def api_coches(session=Depends(get_session)):
+    coches = session.exec(select(Coche)).all()
+    return coches
+
+
+
+
+
+requirements.txt
+****************
+fastapi
+uvicorn
+jinja2
+python-multipart
+sqlmodel
+pymysql
+cryptography
+
+
+
+
+
+
+
+1. AÑADIR PÁGINAS WEB CON JINJA2 A LA API REST DE LA PRÁCTICA ANTERIOR.
+
+cd C:\ruta\de\tu\proyecto
+py -m venv .venv
+.\.venv\Scripts\Activate.ps1
+py -m pip install --upgrade pip
+pip install -r requirements.txt
+pip show uvicorn
+cd src
+dir
+python -m uvicorn main:app --reload --port 8000
+
+
+http://127.0.0.1:8000/
+http://127.0.0.1:8000/coches
+http://127.0.0.1:8000/api/coches
+
+
+
+
+
+
+
+
+db.py
+*****
+from sqlmodel import create_engine, SQLModel, Session
+from src.models.coche import Coche
+import os
+
+DATABASE_URL = os.getenv(
+    "DB_URL",
+    "mysql+pymysql://quevedo:1234@localhost:3306/cochesdb"
+)
+
+engine = create_engine(DATABASE_URL, echo=True)
+
+
+def get_session():
+    with Session(engine) as session:
+        yield session
+
+
+def init_db():
+    # OJO: si no queremos borrar datos cada vez, comentamos el drop_all
+    # SQLModel.metadata.drop_all(engine)
+    SQLModel.metadata.create_all(engine)
+
+    # Comprobamos si ya hay datos
+    with Session(engine) as session:
+        coches_existentes = session.query(Coche).count()
+        if coches_existentes == 0:
+            session.add_all([
+                Coche(modelo="Audi A1", anio=2021, precio=22000),
+                Coche(modelo="Audi A3", anio=2022, precio=28000),
+                Coche(modelo="Audi A4", anio=2023, precio=39000),
+                Coche(modelo="Audi A5", anio=2023, precio=45000),
+                Coche(modelo="Audi A6", anio=2021, precio=52000),
+                Coche(modelo="Audi A7", anio=2022, precio=68000),
+                Coche(modelo="Audi A8", anio=2023, precio=89000),
+                Coche(modelo="Audi Q3", anio=2022, precio=35000),
+                Coche(modelo="Audi Q5", anio=2024, precio=61000),
+                Coche(modelo="Audi e-tron", anio=2023, precio=72000),
+            ])
+            session.commit()
+
+
+
+
+
+
+
+
+coche.py
+********
+from typing import Optional
+from sqlmodel import SQLModel, Field
+
+class Coche(SQLModel, table=True):
+    id: Optional[int] = Field(default=None, primary_key=True)
+    modelo: str
+    anio: int
+    precio: float
+
+
+
+
+
+
+
+
+docker-compose-mysql.yml
+************************
+name: fastapi-mysql
+
+services:   
+  db-mysql:  
+    image: mysql 
+    container_name: db-mysql   
+    environment:  
+      MYSQL_ROOT_PASSWORD: quevedo
+      MYSQL_DATABASE: seriesdb
+      MYSQL_USER: quevedo
+      MYSQL_PASSWORD: 1234
+    ports:  
+      - "3306:3306"  
+
+
+
+
+
+
+
+
+2. HACER QUE FUNCIONE CON UNA BASE DE DATOS MYSQL EN LOCALHOST.
+
+Comandos docker(1)
+******************
+docker compose -f docker-compose-mysql.yml up -d
+
+En la raiz:
+uvicorn src.main:app --reload --port 8000
+
+
+
+Comandos mysql (2)
+******************
+CREATE DATABASE cochesdb CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+
+CREATE USER 'quevedo'@'localhost' IDENTIFIED BY '1234';
+
+GRANT ALL PRIVILEGES ON cochesdb.* TO 'quevedo'@'localhost';
+FLUSH PRIVILEGES;
+
+SHOW DATABASES;
+
+SELECT * FROM coche;
+
+
+pip install sqlmodel pymysql
+uvicorn src.main:app --reload
+
+
+http://127.0.0.1:8000/
+
+
+
+
+
+
+
+
+
+docker-compose.yml
+******************
+name: fastapi-coches
+
+services:
+  fastapi-app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: fastapi-app-coches
+    restart: always
+    ports:
+      - "8000:8000"
+    depends_on:
+      - fastapi-db
+
+  fastapi-db:
+    image: mysql
+    container_name: fastapi-db
+    environment:
+      MYSQL_ROOT_PASSWORD: quevedo
+      MYSQL_DATABASE: cochesdb
+      MYSQL_USER: quevedo
+      MYSQL_PASSWORD: 1234
+    ports:
+      - "3306:3306"
+
+
+
+
+
+Dockerfile
+**********
+# Use the official Python base image
+FROM python:3.13-slim
+
+# Set the working directory inside the container
+WORKDIR /app
+
+# Copy the requirements file to the working directory
+COPY requirements.txt .
+
+# Install the Python dependencies
+RUN pip install -r requirements.txt
+
+# Copy the application code to the working directory
+COPY ./src /app
+
+# Expose the port on which the application will run
+EXPOSE 8000
+
+# Run the FastAPI application using uvicorn server
+CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000"]
+
+
+
+
+
+3. HACER QUE FUNCIONE CON LA BASE DE DATOS MYSQL EN UN CONTENEDOR Y LA APP EN OTRO.
+
+docker stop fastapi-app-series
+docker rm fastapi-app-series
+
+Realizar prueba "eliminar":
+Primero eliminamos un articulo desde la web
+
+Luego:
+docker exec -it fastapi-db mysql -u quevedo -p
+Contraseña: 1234
+USE cochesdb;
+SELECT * FROM coche;
+
+
+
+
+
+
+
+
+
+
+4. HACER QUE FUNCIONE CON UNA BASE DE DATOS POSTGRESQL EN LUGAR DE MYSQL.
+
+docker compose up -d --build
+docker ps
+
+http://127.0.0.1:8000/
+
+Eliminar desde la BD y ver el resultado en la web:
+docker exec -it fastapi-db bash
+mysql -u quevedo -p
+USE cochesdb;
+SELECT * FROM coche;
+DELETE FROM coche WHERE id = 3;
+SELECT * FROM coche;
+
+http://127.0.0.1:8000/
+
+
+
+
+
+
+
+5. HACER QUE FUNCIONE CON POSTGRESQL EN UNA NUBE RENDER. DOCUMENTAR EL PROCESO DE DESPLIEGUE EN UN FICHERO MARKDOWN.
+
+
+
+
+
+
+
+
+
+
+
+
+Ok. Mi profesor me ha dejado la tarea y necesita que trabaje con ese archivo en visual studio code. Te envío la tarea:
+
+Ejercicio FastAPI. Containerización del API con páginas web
+
+1. Añadir páginas web con Jinja2 a la API REST.
+2. Hacer que funcione con una base de datos mysql en localhost.
+3. Hacer que funcione con la base de datos mysql en un contenedor y la app en otro.
+4. Hacer que funcione con una base de datos postgresql en lugar de mysql.
+5. Hacer que funcione con postgresql en una nube Render. Documentar el proceso de despliegue en un fichero Markdown.
+
+Despliegue Render
+1. Crea repositorio (GitHub)
+2. Subir al repositorio src docke-compose.yml
+	2.1. Dockerfile requirements 
+	2.2. Dar de alta fichero .git.ignore para no subir .venv  y _pycache_
+3. Alta en render
+4. Create base de datos en postgreSQL
+5. Crear una instancia de app 
+	5.1. Apuntar repositorio enlace que termina en git
+	5.2. Variable DB_URL
+6. Probar 
+7. Realizar Cambios 
+8. Subir a GitHub 
+9. Confirmar / ver que se realiza el cambio
+
+Dime primero (en un párrafo) que es lo que estoy haciendo, pero en palabras que lo entienda un niño de 10 años. Y adicionalmente dime (en un párrafo)  lo que voy hacer o lo que me pide hacer. Por ahora solo dame eso, NO me des códigos ni comandos ni nada
+
+
+
+
+
+
+
+
+
+
+
+

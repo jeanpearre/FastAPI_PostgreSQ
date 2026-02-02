@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}{% endblock %}</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/static/css/styles.css">
+</head>
+
+<body>
+
+    <header class="navbar">
+        <div class="nav-logo">
+            <span class="audi-logo">Audi</span> Manager
+        </div>
+
+        <nav class="nav-links">
+            <a href="/">Inicio</a>
+            <a href="/coches">Lista</a>
+            <a href="/coches/crear">Crear</a>
+        </nav>
+    </header>
+
+    <main class="container">
+        {% block content %}{% endblock %}
+    </main>
+
+    <footer class="footer">
+        <p>Gestor de Coches Audi — FastAPI + Jinja2</p>
+    </footer>
+
+</body>
+</html>

@@ -1,0 +1,18 @@
+{% extends "fragments/base.html" %}
+
+{% block title %}Detalle del coche{% endblock %}
+
+{% block content %}
+<h1>{{ coche.modelo }}</h1>
+
+<ul class="detalle-lista">
+    <li><strong>Año:</strong> {{ coche.anio }}</li>
+    <li><strong>Precio:</strong> {{ coche.precio }} €</li>
+</ul>
+
+<p class="acciones-extra">
+    <a class="btn" href="/coches">Volver al listado</a>
+    <a class="btn" href="/coches/editar/{{ coche.id }}">Editar</a>
+    <a class="btn btn-delete" href="/coches/eliminar/{{ coche.id }}">Eliminar</a>
+</p>
+{% endblock %}

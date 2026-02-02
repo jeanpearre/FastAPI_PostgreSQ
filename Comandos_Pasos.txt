@@ -1,0 +1,239 @@
+
+1. AÑADIR PÁGINAS WEB CON JINJA2 A LA API REST DE LA PRÁCTICA ANTERIOR.
+
+cd C:\ruta\de\tu\proyecto
+py -m venv .venv
+.\.venv\Scripts\Activate.ps1
+py -m pip install --upgrade pip
+pip install -r requirements.txt
+pip show uvicorn
+cd src
+dir
+python -m uvicorn main:app --reload --port 8000
+
+
+http://127.0.0.1:8000/
+http://127.0.0.1:8000/coches
+http://127.0.0.1:8000/api/coches
+
+
+
+
+
+
+
+
+
+
+2. HACER QUE FUNCIONE CON UNA BASE DE DATOS MYSQL EN LOCALHOST.
+
+Comandos docker(1)
+******************
+docker compose -f docker-compose-mysql.yml up -d
+
+En la raiz:
+uvicorn src.main:app --reload --port 8000
+
+
+
+Comandos mysql (2)
+******************
+CREATE DATABASE cochesdb CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+
+CREATE USER 'quevedo'@'localhost' IDENTIFIED BY '1234';
+
+GRANT ALL PRIVILEGES ON cochesdb.* TO 'quevedo'@'localhost';
+FLUSH PRIVILEGES;
+
+SHOW DATABASES;
+
+SELECT * FROM coche;
+
+
+pip install sqlmodel pymysql
+uvicorn src.main:app --reload
+
+
+http://127.0.0.1:8000/
+
+
+
+
+
+
+
+
+
+
+3. HACER QUE FUNCIONE CON LA BASE DE DATOS MYSQL EN UN CONTENEDOR Y LA APP EN OTRO.
+
+docker stop fastapi-app-series
+docker rm fastapi-app-series
+
+Realizar prueba "eliminar":
+Primero eliminamos un articulo desde la web
+
+Luego:
+docker exec -it fastapi-db mysql -u quevedo -p
+Contraseña: 1234
+USE cochesdb;
+SELECT * FROM coche;
+
+
+
+
+
+
+
+
+
+
+4. HACER QUE FUNCIONE CON UNA BASE DE DATOS POSTGRESQL EN LUGAR DE MYSQL.
+
+docker compose up -d --build
+docker ps
+
+http://127.0.0.1:8000/
+
+Eliminar desde la BD y ver el resultado en la web:
+docker exec -it fastapi-db bash
+mysql -u quevedo -p
+USE cochesdb;
+SELECT * FROM coche;
+DELETE FROM coche WHERE id = 3;
+SELECT * FROM coche;
+
+http://127.0.0.1:8000/
+
+
+
+
+
+
+
+
+
+
+5. HACER QUE FUNCIONE CON POSTGRESQL EN UNA NUBE RENDER. DOCUMENTAR EL PROCESO DE DESPLIEGUE EN UN FICHERO MARKDOWN.
+
+Crear .gitignore
+.venv/
+__pycache__/
+*.pyc
+.env
+
+
+cd RUTA/DE/TU/PROYECTO
+git init
+git add .
+git commit -m "Proyecto FastAPI_PostgreSQL"
+
+
+Crear repositorio en GitHub
+New repository.
+Nombre: fastapi-coches.
+Lo creamos vacío (sin README, sin .gitignore, sin licencia).
+
+
+git remote add origin https://github.com/TU_USUARIO/fastapi-coches.git
+git branch -M main
+git push -u origin main
+
+
+Crear la base de datos PostgreSQL en Render:
+servicio de base de datos PostgreSQL
+En el panel de Render, pulsamos New → PostgreSQL (o similar).
+Nombre: cochesdb (o similar).
+Región: la que queramos (mejor cercana).
+Plan: el gratuito si está disponible.
+Creamos la base de datos.
+Obtener la URL de conexión
+
+Entramos en el servicio PostgreSQL en Render.
+Buscamos la sección Connection o Internal Database URL / External Database URL.
+Copiamos la URL de conexión, que tendrá una pinta similar a:
+postgresql://usuario:password@host:puerto/nombrebd
+
+
+Crear el servicio web de FastAPI en Render:
+En Render, pulsamos New → Web Service.
+Elegimos Build from a Git repository.
+Conectamos nuestra cuenta de GitHub (si no lo hemos hecho antes).
+Seleccionamos el repositorio fastapi-coches.
+configuración inicial
+Name: fastapi-coches (o similar).
+Region: la misma que la base de datos, si es posible.
+Branch: main.
+Runtime: Python.
+
+Configurar la variable de entorno DB_URL
+En la sección de Environment / Environment Variables del servicio web:
+Name: DB_URL
+Value: la URL de conexión de PostgreSQL que copiamos antes de Render.
+
+Guarda los cambios.
+Vuelve al panel principal del servicio web y pulsa Manual Deploy → Clear build cache & deploy.
+
+https://TU_SERVICIO.onrender.com/
+https://TU_SERVICIO.onrender.com/coches
+
+
+Realizar pruebas:
+Modificar algo en el proyecto
+Por ejemplo, cambiamos un texto en templates/index.html:
+
+html
+<h1>Concesionario Oficial Audi</h1>
+por:
+
+html
+<h1>Concesionario Oficial Audi (Render)</h1>
+Guardamos.
+
+git add .
+git commit -m "Cambio de texto para probar redeploy en Render"
+git push
+
+https://TU_SERVICIO.onrender.com/
+
+
+
+Nota:
+si se actualiza el github llevamos la actualización a VSCode con:
+git pull --rebase origin main
+
+Esto significa que debemos elegir una de las versiones
+Hay un conflicto de actualización
+<<<<<<< HEAD
+...tu versión local...
+=======
+...versión que viene de GitHub...
+>>>>>>> 5f1eab6
+
+
+Esto NO borra tu proyecto, NO borra tu código, NO rompe nada.
+Solo fuerza que GitHub acepte tu versión.
+git push origin main --force
+
+
+Cambiar el servicio para que use GitHub
+En Render, elimina el servicio web actual (solo el web, NO la base de datos).
+New → Web Service → Build from GitHub repo
+Selecciona tu repo FastAPI_PostgreSQ.
+
+pip install -r requirements.txt
+Start command:
+
+uvicorn src.main:app --host 0.0.0.0 --port $PORT
+Variable de entorno:
+
+DB_URL con la URL de tu base de datos
+
+
+Cambiar el servicio para que use Docker:
+Render solo se actualiza cuando tú haces un deploy manual
+Render → tu servicio → Manual Deploy → Clear build cache & deploy
+
+
+
+
